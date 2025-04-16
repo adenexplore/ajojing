@@ -80,6 +80,16 @@
       .btn {
         flex: 1;
       }
+      .btn-topup {
+        border-color: #007aff;
+        color: #007aff;
+      }
+      
+      .btn-topup:hover {
+        background: #007aff;
+        color: #fff;
+      }
+      
     }
 
     .banner {
@@ -183,9 +193,28 @@
     <div class="auth-buttons">
       <button class="btn" onclick="openModal('login')">Login</button>
       <button class="btn btn-register" onclick="openModal('register')">Daftar</button>
+      <button class="btn btn-topup" onclick="showTopup()">Top Up Dana</button>
+
     </div>
   </header>
-
+  <script>
+    function showTopup() {
+      Swal.fire({
+        title: 'Top Up Dana Berhasil!',
+        text: 'Rp 100.000 telah ditambahkan ke akun Anda.',
+        icon: 'success',
+        confirmButtonText: 'Oke',
+        background: '#f0f0f0',
+        color: '#333',
+        confirmButtonColor: '#007aff',
+        imageWidth: 100,
+        imageHeight: 50,
+        imageAlt: 'Dana Logo'
+      });
+    }
+  </script>
+  
+  
   <section class="banner">
     <h1>Selamat Datang di Dunia Ajojing!</h1>
     <p>Mainkan game seru tanpa resiko!</p>
