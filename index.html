@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Barudak Ajojing GameZone</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <style>
     * {
       margin: 0;
@@ -181,42 +183,92 @@
     <p>© 2025 Barudak Ajojing GameZone. Just for fun, no real gambling.</p>
   </footer>
 
-  <!-- Modal -->
-  <div class="modal" id="modal">
-    <div class="modal-content" id="modalContent">
-      <h3 id="modalTitle">Login</h3>
-      <input type="email" placeholder="Masukkan Email" id="emailInput" />
-      <button onclick="submitForm()">Lanjutkan</button>
-    </div>
-  </div>
-
   <script>
-    function openModal(mode) {
-      const modal = document.getElementById("modal");
-      const title = document.getElementById("modalTitle");
-      title.innerText = mode === 'login' ? 'Login dengan Email' : 'Daftar Akun Baru';
-      modal.style.display = "flex";
-    }
-
-    function submitForm() {
-      const email = document.getElementById("emailInput").value;
-      if (email.includes("@")) {
-        alert("Berhasil! Selamat datang, " + email);
-        document.getElementById("modal").style.display = "none";
-      } else {
-        alert("Masukkan email yang valid.");
-      }
-    }
-
-    window.onclick = function(e) {
-      const modal = document.getElementById("modal");
-      if (e.target === modal) {
-        modal.style.display = "none";
-      }
-    };
-
     function playGame(gameName) {
-      alert("Memuat game: " + gameName + " (Coming Soon!)");
+      let content = '';
+
+      if (gameName === 'Slot Buah') {
+        content = `
+          <p>🍒 🍋 🍉</p>
+          <button onclick="spinSlot()">Putar Slot</button>
+        `;
+      } else if (gameName === 'Roda Keberuntungan') {
+        content = `
+          <p>🎡 Putar roda untuk keberuntunganmu!</p>
+          <button onclick="spinWheel()">Putar Roda</button>
+        `;
+      } else if (gameName === '777 Jackpot') {
+        content = `
+          <p>🎰 Jackpot Mode ON!</p>
+          <button onclick="playJackpot()">Mainkan Jackpot</button>
+        `;
+      } else if (gameName === 'Lucky Spin') {
+        content = `
+          <p>🎲 Klik untuk spin angka keberuntungan!</p>
+          <button onclick="luckySpin()">Spin Angka</button>
+        `;
+      }
+
+      Swal.fire({
+        title: gameName,
+        html: content,
+        showConfirmButton: false,
+        showCloseButton: true,
+        background: '#1e1e1e',
+        color: '#fff',
+      });
+    }
+
+    function spinSlot() {
+      const buah = ['🍒', '🍋', '🍉', '🍇', '🍓'];
+      const result = [
+        buah[Math.floor(Math.random() * buah.length)],
+        buah[Math.floor(Math.random() * buah.length)],
+        buah[Math.floor(Math.random() * buah.length)]
+      ];
+      Swal.fire({
+        title: 'Hasil Slot:',
+        html: `<p style="font-size: 2rem">${result.join(' ')}</p>`,
+        background: '#000',
+        color: '#fff'
+      });
+    }
+
+    function spinWheel() {
+      const hasil = ['Bonus 100', 'Zonk 😢', 'Spin Lagi', 'Hadiah Misterius 🎁', 'Extra Life ❤️'];
+      const random = hasil[Math.floor(Math.random() * hasil.length)];
+      Swal.fire({
+        title: '🎡 Hasil Roda:',
+        text: random,
+        background: '#000',
+        color: '#fff'
+      });
+    }
+
+    function playJackpot() {
+      const angka = [7, 7, 7];
+      const acak = [
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10)
+      ];
+      const isJackpot = JSON.stringify(acak) === JSON.stringify(angka);
+      Swal.fire({
+        title: isJackpot ? '🎉 JACKPOT!' : 'Coba Lagi!',
+        html: `<p style="font-size: 2rem">${acak.join(' - ')}</p>`,
+        background: '#000',
+        color: '#fff'
+      });
+    }
+
+    function luckySpin() {
+      const number = Math.floor(Math.random() * 100) + 1;
+      Swal.fire({
+        title: '🎲 Angka Kamu:',
+        text: number,
+        background: '#000',
+        color: '#fff'
+      });
     }
   </script>
 
