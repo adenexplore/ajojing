@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Barudak Ajojing GameZone</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #121212;
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #1e1e1e;
+      border-bottom: 2px solid #ff0077;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ff0077;
+    }
+
+    .auth-buttons .btn {
+      background: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      margin-left: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #ff0077;
+      color: #fff;
+      border-color: #ff0077;
+    }
+
+    .btn-register {
+      border-color: #00ffaa;
+      color: #00ffaa;
+    }
+
+    .btn-register:hover {
+      background: #00ffaa;
+      color: #121212;
+    }
+
+    .banner {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, #ff0077, #7700ff);
+    }
+
+    .banner h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .banner p {
+      font-size: 1.2rem;
+    }
+
+    .games {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .games h2 {
+      margin-bottom: 1.5rem;
+      color: #00ffaa;
+    }
+
+    .game-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+
+    .game-card {
+      background: #2a2a2a;
+      padding: 2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .game-card:hover {
+      transform: scale(1.05);
+      background: #ff0077;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #1e1e1e;
+      border-top: 1px solid #444;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">🎰 Ajojing Slots</div>
+    <div class="auth-buttons">
+      <button class="btn">Login</button>
+      <button class="btn btn-register">Daftar</button>
+    </div>
+  </header>
+
+  <section class="banner">
+    <h1>Selamat Datang di Dunia Ajojing!</h1>
+    <p>Mainkan game seru tanpa resiko!</p>
+  </section>
+
+  <section class="games">
+    <h2>🎮 Game Pilihan</h2>
+    <div class="game-list">
+      <div class="game-card">Slot Buah</div>
+      <div class="game-card">Roda Keberuntungan</div>
+      <div class="game-card">777 Jackpot</div>
+      <div class="game-card">Lucky Spin</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Barudak Ajojing GameZone. Just for fun, no real gambling.</p>
+  </footer>
+
+</body>
+</html>
