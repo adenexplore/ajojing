@@ -200,19 +200,44 @@
   <script>
     function showTopup() {
       Swal.fire({
-        title: 'Top Up Dana Berhasil!',
-        text: 'Rp 100.000 telah ditambahkan ke akun Anda.',
-        icon: 'success',
-        confirmButtonText: 'Oke',
-        background: '#f0f0f0',
-        color: '#333',
-        confirmButtonColor: '#007aff',
-        imageWidth: 100,
-        imageHeight: 50,
-        imageAlt: 'Dana Logo'
+        title: 'Top Up Dana',
+        html:
+          `<input id="nominal" type="number" class="swal2-input" placeholder="Masukkan nominal (Rp)">` +
+          `<select id="metode" class="swal2-input">
+            <option value="" disabled selected>Pilih metode</option>
+            <option value="Dana">Dana</option>
+            <option value="OVO">OVO</option>
+            <option value="Gopay">Gopay</option>
+          </select>`,
+        showCancelButton: true,
+        confirmButtonText: 'Top Up',
+        cancelButtonText: 'Batal',
+        preConfirm: () => {
+          const nominal = document.getElementById('nominal').value;
+          const metode = document.getElementById('metode').value;
+  
+          if (!nominal || nominal <= 0) {
+            Swal.showValidationMessage('Nominal harus diisi dengan benar');
+          } else if (!metode) {
+            Swal.showValidationMessage('Pilih metode pembayaran');
+          } else {
+            return { nominal, metode };
+          }
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: 'Berhasil!',
+            html: `Top Up sebesar <strong>Rp ${parseInt(result.value.nominal).toLocaleString()}</strong><br>dengan metode <strong>${result.value.metode}</strong> berhasil dilakukan.`,
+            icon: 'success',
+            confirmButtonText: 'Oke',
+            confirmButtonColor: '#007aff'
+          });
+        }
       });
     }
   </script>
+  
   
   
   <section class="banner">
