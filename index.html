@@ -92,6 +92,16 @@
       
     }
 
+    .swal2-select {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      background-color: #fff;
+      color: #333;
+    }
+    
+
     .banner {
       text-align: center;
       padding: 3rem 1rem;
@@ -200,42 +210,53 @@
   <script>
     function showTopup() {
       Swal.fire({
-        title: 'Top Up Dana',
-        html:
-          `<input id="nominal" type="number" class="swal2-input" placeholder="Masukkan nominal (Rp)">` +
-          `<select id="metode" class="swal2-input">
-            <option value="" disabled selected>Pilih metode</option>
-            <option value="Dana">Dana</option>
-            <option value="OVO">OVO</option>
-            <option value="Gopay">Gopay</option>
-          </select>`,
+        title: 'Masukkan Nominal',
+        input: 'number',
+        inputLabel: 'Nominal (Rp)',
+        inputPlaceholder: 'Contoh: 10000',
         showCancelButton: true,
-        confirmButtonText: 'Top Up',
+        confirmButtonText: 'Lanjut',
         cancelButtonText: 'Batal',
-        preConfirm: () => {
-          const nominal = document.getElementById('nominal').value;
-          const metode = document.getElementById('metode').value;
-  
-          if (!nominal || nominal <= 0) {
-            Swal.showValidationMessage('Nominal harus diisi dengan benar');
-          } else if (!metode) {
-            Swal.showValidationMessage('Pilih metode pembayaran');
-          } else {
-            return { nominal, metode };
+        inputValidator: (value) => {
+          if (!value || value <= 0) {
+            return 'Masukkan nominal yang valid!';
           }
         }
-      }).then((result) => {
-        if (result.isConfirmed) {
+      }).then((nominalResult) => {
+        if (nominalResult.isConfirmed) {
+          const nominal = nominalResult.value;
           Swal.fire({
-            title: 'Berhasil!',
-            html: `Top Up sebesar <strong>Rp ${parseInt(result.value.nominal).toLocaleString()}</strong><br>dengan metode <strong>${result.value.metode}</strong> berhasil dilakukan.`,
-            icon: 'success',
-            confirmButtonText: 'Oke',
-            confirmButtonColor: '#007aff'
+            title: 'Pilih Metode Pembayaran',
+            input: 'select',
+            inputOptions: {
+              Dana: 'Dana',
+              OVO: 'OVO',
+              Gopay: 'Gopay',
+              ShopeePay: 'ShopeePay'
+            },
+            inputPlaceholder: 'Pilih metode',
+            showCancelButton: true,
+            confirmButtonText: 'Top Up',
+            inputValidator: (value) => {
+              if (!value) {
+                return 'Pilih salah satu metode!';
+              }
+            }
+          }).then((metodeResult) => {
+            if (metodeResult.isConfirmed) {
+              const metode = metodeResult.value;
+              Swal.fire({
+                title: 'Berhasil!',
+                html: `Top Up sebesar <strong>Rp ${parseInt(nominal).toLocaleString()}</strong> berhasil dengan <strong>${metode}</strong>`,
+                icon: 'success',
+                confirmButtonText: 'Oke'
+              });
+            }
           });
         }
       });
     }
+    
   </script>
   
   
