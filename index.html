@@ -182,8 +182,38 @@
   <footer>
     <p>© 2025 Barudak Ajojing GameZone. Just for fun, no real gambling.</p>
   </footer>
-
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content" id="modalContent">
+      <h3 id="modalTitle">Login</h3>
+      <input type="email" placeholder="Masukkan Email" id="emailInput" />
+      <button onclick="submitForm()">Lanjutkan</button>
+    </div>
+  </div>
   <script>
+    function openModal(mode) {
+      const modal = document.getElementById("modal");
+      const title = document.getElementById("modalTitle");
+      title.innerText = mode === 'login' ? 'Login dengan Email' : 'Daftar Akun Baru';
+      modal.style.display = "flex";
+    }
+
+    function submitForm() {
+      const email = document.getElementById("emailInput").value;
+      if (email.includes("@")) {
+        alert("Berhasil! Selamat datang, " + email);
+        document.getElementById("modal").style.display = "none";
+      } else {
+        alert("Masukkan email yang valid.");
+      }
+    }
+
+    window.onclick = function(e) {
+      const modal = document.getElementById("modal");
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    };
     function playGame(gameName) {
       let content = '';
 
