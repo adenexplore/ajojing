@@ -101,7 +101,17 @@
       color: #333;
     }
     
-
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    #userEmail {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    
     .banner {
       text-align: center;
       padding: 3rem 1rem;
@@ -200,12 +210,16 @@
 
   <header>
     <div class="logo">🎰 Ajojing Slots</div>
-    <div class="auth-buttons">
+    <div class="auth-buttons" id="authButtons">
       <button class="btn" onclick="openModal('login')">Login</button>
       <button class="btn btn-register" onclick="openModal('register')">Daftar</button>
-      <button class="btn btn-topup" onclick="showTopup()">Top Up Dana</button>
-
     </div>
+    
+    <div class="user-info" id="userInfo" style="display: none;">
+      <span id="userEmail"></span>
+      <button class="btn btn-topup" onclick="showTopup()">Top Up Dana</button>
+    </div>
+    
   </header>
   <script>
     function showTopup() {
@@ -294,23 +308,38 @@
       title.innerText = mode === 'login' ? 'Login dengan Email' : 'Daftar Akun Baru';
       modal.style.display = "flex";
     }
-
+    
     function submitForm() {
       const email = document.getElementById("emailInput").value;
       if (email.includes("@")) {
-        alert("Berhasil! Selamat datang, " + email);
         document.getElementById("modal").style.display = "none";
+        showDashboard(email);
       } else {
-        alert("Masukkan email yang valid.");
+        Swal.fire({
+          icon: 'error',
+          title: 'Email tidak valid',
+          text: 'Masukkan email yang benar, ya!'
+        });
       }
     }
-
+    
+    function showDashboard(email) {
+      // Sembunyikan tombol login/daftar
+      document.getElementById("authButtons").style.display = "none";
+    
+      // Tampilkan email dan tombol top up
+      document.getElementById("userEmail").innerText = `👋 Halo, ${email}`;
+      document.getElementById("userInfo").style.display = "flex";
+    }
+    
+    // Tutup modal saat klik luar
     window.onclick = function(e) {
       const modal = document.getElementById("modal");
       if (e.target === modal) {
         modal.style.display = "none";
       }
     };
+    
     function playGame(gameName) {
       let content = '';
 
